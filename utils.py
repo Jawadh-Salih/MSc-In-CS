@@ -32,13 +32,15 @@ def create_edge(u, v) :
 def create_init_graph(U, V, G) :
     # I have a set of nodes. Need to set the E out those nodes U,V
     n = randint(1, int((len(U)))) # n is the number of edges will be created. * len(V))/2
-    flag = True
-    while(flag) :
+    # flag = True
+    for i in range(n) :
         u = U[randint(0, len(U) - 1)]
         v = V[randint(0, len(V)) - 1]
         G.insert_edge(u, v)
-        if (allHasEdges(U)) :
-            flag = False
+    # while(flag) :
+        
+        # if (allHasEdges(U)) :
+        #     flag = False
     
     return G
 
@@ -111,8 +113,8 @@ def plot_degree_distibution(V) :
     degrees = [v.degree for v in newV]
     zipf = get_zipf_curve(degrees[0], len(V))
     
-    plt.plot(degrees, 'ro')
     plt.plot(zipf, 'bo')
+    plt.plot(degrees, 'ro')
     plt.show()
     print(max(degrees))
     print(degrees[0])
@@ -180,5 +182,7 @@ def cum_prob_dist(U):
     sum_degrees = tot_degree(U)
     cum = 0.0
     for u in U :
+        if (u.degree == 0) :
+            cum = cum + (1.0 /sum_degrees)
         cum = cum + (1.0 * u.degree)/sum_degrees
         u.cum_prob = cum

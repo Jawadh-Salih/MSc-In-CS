@@ -52,4 +52,10 @@ class Graph :
         for v in V:
             degrees.append(v.degree)
         print(degrees)
+
+    def get_degree_dist(self, V) :
+        degrees = []
+        for v in V :
+            degrees.append(v.degree)
+        return degrees
         

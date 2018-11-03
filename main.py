@@ -11,7 +11,7 @@ import numpy
 #  This will be a dynamic dictionery where with the time, new M,U pairs are combined. 
 
 M = create_nodes("M", 1000) # Should create a dictionary
-U = create_nodes("U", 1000)
+U = create_nodes("U", 10000)
 G = Graph(M, U)
 create_init_graph(M, U, G)
 
@@ -26,30 +26,75 @@ print('Initial Graph is created') # This initial Graph is a collection of Edges 
 G.print_degree_dist(M)
 G.print_graph()
 cum_prob_dist(M)
+cum_prob_dist(U)
 
-for i in range(10000) :
-    u = get_random_user(U)
+def BA_Model() :
+    for i in range(10000) :
+        u = get_random_user(U)
 
-    for m in M:
-        if (m.cum_prob > random()) :
-            # add an edge to k
-            newU = Node(0, 'U' + str(len(U)))
-            U.append(newU)
-            G.insert_edge(newU, m)
-            cum_prob_dist(M)
+        for m in M:
+            if (m.cum_prob > random()) :
+                # add an edge to k
+                newU = Node(0, 'U' + str(len(U)))
+                U.append(newU)
+                G.insert_edge(newU, m)
+                cum_prob_dist(M)
+            
+                break
+            else :
+                G.insert_edge(u, m)
+                cum_prob_dist(M)
+
+
+def Pref_Model() :
+    for i in range(10000) :
+    # Can add a new User.
+        for m in M:
+            if (m.cum_prob > random()) :
+                # add an edge to k
+                newU = Node(0, 'U' + str(len(U)))
+                U.append(newU)
+                G.insert_edge(newU, m)
+                cum_prob_dist(M)
+                break
+        # # Add a new Object
+        for u in U : 
+            if (u.cum_prob > random()) :
+                newM = Node(0, 'M' + str(len(M)))
+                M.append(newM)
+                G.insert_edge(u, newM)
+                cum_prob_dist(U)
+                break 
+
+        # Adding an edge to the exisiting Graph.
+        u = get_random_user(U) 
+        for m in M :
+            if (m.cum_prob > random()) :
+                G.insert_edge(u, m)
+                cum_prob_dist(M)
+                break
         
-            break
-        else :
-            G.insert_edge(u, m)
-            cum_prob_dist(M)
-# for i in range(10000) :
-    
-        # m has to be chosen with the preference..
-# Choose a Node from the set where the pref_prob is greater or equal.
-# G.print_graph()
+        # Adding an edge with pref prob
+        tempM = None
+        tempU = None
+        for m in M :
+            if (m.cum_prob > random()) :
+                tempM = m
+                break
+        for u in U :
+            if (u.cum_prob > random()) :
+                tempU = u
+                break
+        
+        G.insert_edge(tempU, tempM)
+        cum_prob_dist(M)
+        cum_prob_dist(U)
+
+Pref_Model()
+
 G.print_degree_dist(M)
 
-
-# print(sorted(get_current_degree_probs(M,  tot_degree(M))))
 plot_degree_distibution(M)
+plot_degree_distibution(U)
+
 
