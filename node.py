@@ -4,7 +4,7 @@ class Node :
     degree = 0
     label = ""
     prob = 0.0
-    cum_prob = 0.0
+    cumulative_prob = 0.0
     def __init__(self, degree = 0, label="") :
         self.degree = degree
         self.label = label
