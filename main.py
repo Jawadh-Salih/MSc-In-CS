@@ -120,8 +120,9 @@ def Pref_Model() :
                 cumulative_prob_dist(M)
                 break
         # Add a new Object
+        # val = random()
         for u in U : 
-            if (u.cumulative_prob > random()) :
+            if (u.cumulative_prob > val) :
                 newM = Node(0, 'M' + str(len(M)))
                 M.append(newM)
                 G.insert_edge(u, newM)
@@ -130,7 +131,7 @@ def Pref_Model() :
 
         # Adding an edge to the exisiting Graph.
         u = get_random_user(U) 
-        val = random()
+        # val = random()
         for m in M :
             if (m.cumulative_prob > val) :
                 G.insert_edge(u, m)
@@ -140,12 +141,12 @@ def Pref_Model() :
         # Adding an edge with pref prob
         tempM = None
         tempU = None
-        val = random()
+        # val = random()
         for m in M :
             if (m.cumulative_prob > val) :
                 tempM = m
                 break
-        val = random()
+        # val = random()
         for u in U :
             if (u.cumulative_prob > val) :
                 tempU = u
@@ -158,12 +159,13 @@ def Pref_Model() :
 def Pref_Model_Actual(iters) :
     for x in range(iters) :
 
-        add_new_user(G, U, M, randint(1,10))
-        add_new_movie(G, U, M, randint(1,10))
-        # add_edge_to_graph(G, U, M, randint(1,10))
-        add_edge_with_pref(G, U, M, randint(1,10))
-Pref_Model_Actual(1000)
-
+        add_new_user(G, U, M, 1) #C randint(1,10))
+        add_new_movie(G, U, M, 1) #randint(1,10))
+        add_edge_to_graph(G, U, M, 1) #randint(1,10))
+        add_edge_with_pref(G, U, M, 1) # randint(1,10))
+Pref_Model_Actual(100000)
+# Pref_Model()
+# Pref_Model()
 G.print_degree_dist(M)
 
 jet= plt.get_cmap('jet')
@@ -171,11 +173,11 @@ colors = iter(jet(np.linspace(0,1,200)))
 max_degree = max(m.degree for m in M)
 
 create_zipf_nodes(Z, max_degree, 2)
-plot_degree_distibution(plt, Z, next(colors))
+# plot_degree_distibution(plt, Z, next(colors))
 create_zipf_nodes(Z, max_degree, 1)
 plot_degree_distibution(plt, Z, next(colors))
 plot_degree_distibution(plt, M, next(colors))
-plot_degree_distibution(plt, U, next(colors))
+# plot_degree_distibution(plt, U, next(colors))
 # plot_degree_distibution(plt, U, next(colors))
 
 plt.show()
