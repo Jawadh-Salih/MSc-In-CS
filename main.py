@@ -49,11 +49,11 @@ def BA_Model() :
                 cumulative_prob_dist(M)
 
 
-def add_new_user(G, U, M, num) :
+def add_new_user(G, U, M, num, val) :
     # should add this user to m nodes from M 
     # preserving the preferencial attachment behavior
     user = Node(0, 'U' + str(len(U)))
-    val = random()
+    # val = random()
     for x in range(num) :
         for m in M : 
             if (m.cumulative_prob > val) :
@@ -62,10 +62,10 @@ def add_new_user(G, U, M, num) :
                 cumulative_prob_dist(M)
                 break
 
-def add_new_movie(G, U, M, num) :
+def add_new_movie(G, U, M, num, val) :
     newM = Node(0, 'M' + str(len(M)))
     # Add a new Object
-    val = random()
+    # val = random()
     for x in range(num):
         for u in U : 
             if (u.cumulative_prob > val) :
@@ -74,30 +74,30 @@ def add_new_movie(G, U, M, num) :
                 cumulative_prob_dist(U)
                 break 
 
-def add_edge_to_graph(G, U, M, num) :
+def add_edge_to_graph(G, U, M, num, val) :
     # Adding an edge to the exisiting Graph.
-    val = random()
+    # val = random()
     for x in range(num):
         u = get_random_user(U) 
-        val = random()
+        # val = random()
         for m in M :
             if (m.cumulative_prob > val) :
                 G.insert_edge(u, m)
                 cumulative_prob_dist(M)
                 break
 
-def add_edge_with_pref(G, U, M, num):
+def add_edge_with_pref(G, U, M, num, val):
     # Adding an edge with pref prob
 
     tempM = None
     tempU = None
-    val = random()
+    # val = random()
     for x in range(num) :
         for m in M :
             if (m.cumulative_prob > val) :
                 tempM = m
                 break
-        val = random()
+        # val = random()
         for u in U :
             if (u.cumulative_prob > val) :
                 tempU = u
@@ -158,11 +158,11 @@ def Pref_Model() :
 
 def Pref_Model_Actual(iters) :
     for x in range(iters) :
-
-        add_new_user(G, U, M, 1) #C randint(1,10))
-        add_new_movie(G, U, M, 1) #randint(1,10))
-        add_edge_to_graph(G, U, M, 1) #randint(1,10))
-        add_edge_with_pref(G, U, M, 1) # randint(1,10))
+        val = random() # for each add of nodes and edges we get one random value.
+        add_new_user(G, U, M, 1, val) #C randint(1,10))
+        add_new_movie(G, U, M, 1, val) #randint(1,10))
+        add_edge_to_graph(G, U, M, 1, val) #randint(1,10))
+        add_edge_with_pref(G, U, M, 1, val) # randint(1,10))
 Pref_Model_Actual(100000)
 # Pref_Model()
 # Pref_Model()
