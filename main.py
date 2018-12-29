@@ -81,7 +81,7 @@ def add_edge_to_graph(G, U, M, num, val) :
     # Adding an edge to the exisiting Graph.
     for x in range(num):
         u = get_random_user(U) 
-        val = random()
+        # val = random()
         for m in M :
             if (m.cumulative_prob > val) :
                 G.insert_edge(u, m)
@@ -99,6 +99,7 @@ def add_edge_with_pref(G, U, M, num, val):
             if (m.cumulative_prob > val) :
                 tempM = m
                 break
+
         for u in U :
             if (u.cumulative_prob > val) :
                 tempU = u
@@ -120,7 +121,8 @@ def Pref_Model(iters) :
         val = random()
         add_edge_with_pref(G, U, M, 1, val) # randint(1,10))
 
-Pref_Model(10000) # Model to  10000 iterations to implement the simualtion.
+Pref_Model(100) # Model to  10000 iterations to implement the simualtion.
+
 
 jet= plt.get_cmap('jet')
 colors = iter(jet(np.linspace(0,1,200)))
