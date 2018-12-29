@@ -46,9 +46,10 @@ def create_init_graph(U, V, G) :
     return G
 
 def create_zipf_nodes(Z, max_degree, exp) :
-    for i in range(len(Z)):
-        Z[i].degree = 1.0 * (max_degree/(i+1)**exp)
-
+    for i in range(0, len(Z) - 1 ): 
+        Z[i + 1].degree = (1.0 * max_degree)/((i+1)**exp)
+    Z[0].degree = (1.0 * max_degree)/((1)**exp)
+        
 
 def allHasEdges(U) :
     for u in U :
@@ -124,7 +125,9 @@ def plot_degree_distibution(plot, V, color) :
     newV = sort_by_degree(V)
     # plot above distribution.
     degrees = [v.degree for v in newV]  
+    print(degrees)
     plot.loglog(degrees, 'o', color)
+    plt.grid(True)
 def tot_degree(V) :
     return sum(v.degree for v in V)
 
@@ -190,3 +193,4 @@ def cumulative_prob_dist(U):
             cumulative = cumulative + (1.0 /sum_degrees) # Least probability it can get.
         cumulative = cumulative + (1.0 * u.degree)/sum_degrees
         u.cumulative_prob = cumulative
+

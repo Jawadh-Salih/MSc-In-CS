@@ -2,6 +2,7 @@
 
 class Node :
     degree = 0
+    cumulative_degree = 0
     label = ""
     prob = 0.0
     cumulative_prob = 0.0
