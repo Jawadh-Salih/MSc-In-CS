@@ -31,22 +31,6 @@ cumulative_prob_dist(M)
 cumulative_prob_dist(U)
 
 # Barabasi ALbert Model. 
-def BA_Model() :
-    for i in range(10000) :
-        u = get_random_user(U)
-
-        for m in M:
-            if (m.cumulative_prob > random()) :
-                # add an edge to k
-                newU = Node(0, 'U' + str(len(U)))
-                U.append(newU)
-                G.insert_edge(newU, m)
-                cumulative_prob_dist(M)
-            
-                break
-            else :
-                G.insert_edge(u, m)
-                cumulative_prob_dist(M)
 
 # Below this, I have implemented the Model proposed in the Paper Named Evolving Model of Online Bipartite Network
 
@@ -70,6 +54,7 @@ def add_new_movie(G, U, M, num, val) :
     # Add a new Object
     for x in range(num):
         for u in U : 
+            # Movie will be attached with the most preferable user. 
             if (u.cumulative_prob > val) :
                 M.append(newM)
                 G.insert_edge(u, newM)
@@ -121,7 +106,7 @@ def Pref_Model(iters) :
         val = random()
         add_edge_with_pref(G, U, M, 1, val) # randint(1,10))
 
-Pref_Model(100) # Model to  10000 iterations to implement the simualtion.
+Pref_Model(1000000) # Model to  10000 iterations to implement the simualtion.
 
 
 jet= plt.get_cmap('jet')
