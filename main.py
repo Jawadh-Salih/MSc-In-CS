@@ -93,14 +93,18 @@ def add_edge_with_pref(G, U, M, num, val):
 
 # Implementation of the Model proposed in the paper. 
 def Pref_Model(iters) :
+    # Each iteration is 
     for x in range(iters) :
         val = random()
+        # this callings has to be weighted. 
         add_new_user(G, U, M, 1, val) #C randint(1,10))
         val = random()
+        # Movies are higher in count than users. 
         add_new_movie(G, U, M, 1, val) #randint(1,10))
         val = random()
         add_edge_to_graph(G, U, M, 1, val) #randint(1,10))
         val = random()
+        # below is more than above. 
         add_edge_with_pref(G, U, M, 1, val) # randint(1,10))
 
 Pref_Model(100000) # Model to  100000 iterations to implement the simualtion.
