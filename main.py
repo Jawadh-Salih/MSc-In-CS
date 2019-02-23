@@ -30,6 +30,7 @@ G.print_degree_dist(M)
 cumulative_prob_dist(M)
 cumulative_prob_dist(U)
 
+
 # Below this, I have implemented the Model proposed in the Paper Named Evolving Model of Online Bipartite Network
 
 # Scenario for adding a new User to the Network 
@@ -52,6 +53,7 @@ def add_new_movie(G, U, M, num, val) :
     # Add a new Object
     for x in range(num):
         for u in U : 
+            # Movie will be attached with the most preferable user. 
             if (u.cumulative_prob > val) :
                 M.append(newM)
                 G.insert_edge(u, newM)
@@ -93,23 +95,21 @@ def add_edge_with_pref(G, U, M, num, val):
 
 # Implementation of the Model proposed in the paper. 
 def Pref_Model(iters) :
-    # Each iteration is 
+    # Each Iteration is an instance of time. So, this need to bo addressed in a more practical way. 
     for x in range(iters) :
         val = random()
-        # this callings has to be weighted. 
         add_new_user(G, U, M, 1, val) #C randint(1,10))
         val = random()
         # Movies are higher in count than users. 
         add_new_movie(G, U, M, 1, val) #randint(1,10))
         val = random()
+        
         add_edge_to_graph(G, U, M, 1, val) #randint(1,10))
         val = random()
-        # below is more than above. 
+        # Preferential attachment of users are more than random attachments. 
         add_edge_with_pref(G, U, M, 1, val) # randint(1,10))
 
-Pref_Model(100000) # Model to  100000 iterations to implement the simualtion.
-
-
+Pref_Model(5000)
 jet= plt.get_cmap('jet')
 colors = iter(jet(np.linspace(0,1,200)))
 max_degree_m = max(m.degree for m in M)
