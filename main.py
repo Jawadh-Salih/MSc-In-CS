@@ -3,6 +3,7 @@ from node import Node
 from graph import Graph
 from utils import sort_by_degree, create_zipf_nodes, cumulative_prob_dist, create_nodes, get_prob_dict, create_init_graph, create_edge, cal_degree, get_random_user, get_current_degree_probs, insertEdge, get_random_max_prob_movie, plot_degree_distibution, get_alpha_for_degree_dist, tot_degree, wieghted_choice
 
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 # Create some unique labels.
@@ -12,11 +13,16 @@ import matplotlib.pyplot as plt
 #  This will be a dynamic dictionery where with the time, new M,U pairs are combined. 
 m_nodes = randint(900, 1000)
 
+print("######################## Creating Nodes ############################")
 M = create_nodes("M", m_nodes) # Should create a dictionary
+print("######################## Objects Nodes are Created ############################")
 U = create_nodes("U", 10000)
+print("######################## User Nodes are Created ############################")
 Z = create_nodes('Z', m_nodes)
+print("######################## Reference Zipf's Nodes are Created ############################")
 
 G = Graph(M, U)
+print("Initial Network is being created.....")
 create_init_graph(M, U, G)
 
 # G.print_graph()
@@ -25,7 +31,7 @@ create_init_graph(M, U, G)
 # need to see whether nodes get upon it.
 
 
-print('Initial Graph is created') # This initial Graph is a collection of Edges where pair of nodes from M, U are linked 
+print('Initial Network is created') # This initial Graph is a collection of Edges where pair of nodes from M, U are linked 
 G.print_degree_dist(M)
 cumulative_prob_dist(M)
 cumulative_prob_dist(U)
@@ -98,15 +104,15 @@ def add_edge_with_pref(G, U, M, num, val):
 def Pref_Model(iters) :
     for x in range(iters) :
         val = random()
-        add_new_user(G, U, M, 1, val) #C randint(1,10))
+        add_new_user(G, U, M, 3, val) #C randint(1,10))
         val = random()
-        add_new_movie(G, U, M, 1, val) #randint(1,10))
+        add_new_movie(G, U, M, 3, val) #randint(1,10))
         val = random()
-        add_edge_to_graph(G, U, M, 1, val) #randint(1,10))
+        add_edge_to_graph(G, U, M, 65, val) #randint(1,10))
         val = random()
-        add_edge_with_pref(G, U, M, 1, val) # randint(1,10))
+        add_edge_with_pref(G, U, M, 30, val) # randint(1,10))
 
-Pref_Model(1000000) # Model to  10000 iterations to implement the simualtion.
+Pref_Model(int(sys.argv[1])) # Model to  10000 iterations to implement the simualtion.
 
 
 jet= plt.get_cmap('jet')
@@ -121,8 +127,10 @@ G.print_degree_dist(sort_by_degree(M))
 m1 = Node(max_degree_m, 'M' + str(len(M)))
 M.insert(0, m1)
 plot_degree_distibution(plt, M, next(colors))
-u1 = Node(max_degree_u, 'U' + str(len(U)))
-U.insert(0, u1)
-plot_degree_distibution(plt, U, next(colors))
+# u1 = Node(max_degree_u, 'U' + str(len(U)))
+# U.insert(0, u1)
+# plot_degree_distibution(plt, U, next(colors))
+fig = plt.gcf()
+fig.canvas.set_window_title(sys.argv[1] + '_iterations')
 plt.show()
 
