@@ -36,7 +36,6 @@ G.print_degree_dist(M)
 cumulative_prob_dist(M)
 cumulative_prob_dist(U)
 
-# Barabasi ALbert Model. 
 
 # Below this, I have implemented the Model proposed in the Paper Named Evolving Model of Online Bipartite Network
 
@@ -102,6 +101,7 @@ def add_edge_with_pref(G, U, M, num, val):
 
 # Implementation of the Model proposed in the paper. 
 def Pref_Model(iters) :
+    # Each Iteration is an instance of time. So, this need to bo addressed in a more practical way. 
     for x in range(iters) :
         val = random()
         add_new_user(G, U, M, 3, val) #C randint(1,10))
@@ -113,6 +113,7 @@ def Pref_Model(iters) :
         add_edge_with_pref(G, U, M, 30, val) # randint(1,10))
 
 Pref_Model(int(sys.argv[1])) # Model to  10000 iterations to implement the simualtion.
+
 
 
 jet= plt.get_cmap('jet')
